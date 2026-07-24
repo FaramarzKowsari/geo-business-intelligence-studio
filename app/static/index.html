@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Privacy-aware local business discovery and geospatial intelligence dashboard">
+  <title>GeoBusiness Intelligence Studio</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynhP7VZV3FE8fMZbC4L2f4Wl80mE=" crossorigin="">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">OPEN DATA · OPTIONAL BYOK AI</p>
+      <h1>GeoBusiness Intelligence Studio</h1>
+      <p>Discover, normalize, map, compare, and export local-business records without making paid AI mandatory.</p>
+    </div>
+    <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API Docs</a>
+  </header>
+
+  <main>
+    <section class="panel controls" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DISCOVERY</p>
+          <h2 id="search-title">Search businesses</h2>
+        </div>
+        <span id="statusBadge" class="badge">Ready</span>
+      </div>
+
+      <form id="searchForm">
+        <label>
+          Provider
+          <select id="provider" name="provider">
+            <option value="sample">Sample data — offline</option>
+            <option value="openstreetmap">OpenStreetMap</option>
+            <option value="google_places">Google Places API — optional key</option>
+          </select>
+        </label>
+        <label>
+          Business type or name
+          <input id="query" name="query" value="coffee" minlength="2" maxlength="120" required>
+        </label>
+        <label>
+          City
+          <input id="city" name="city" value="Amsterdam" minlength="2" maxlength="120" required>
+        </label>
+        <label>
+          Radius
+          <select id="radius" name="radius">
+            <option value="1000">1 km</option>
+            <option value="3000">3 km</option>
+            <option value="5000" selected>5 km</option>
+            <option value="10000">10 km</option>
+            <option value="25000">25 km</option>
+          </select>
+        </label>
+        <label>
+          Maximum records
+          <input id="limit" name="limit" type="number" min="1" max="100" value="30">
+        </label>
+        <label class="checkbox-label">
+          <input id="deduplicate" name="deduplicate" type="checkbox" checked>
+          Remove probable duplicates
+        </label>
+        <button type="submit" class="primary">Run search</button>
+      </form>
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <section class="metrics" aria-label="Search metrics">
+      <article><span id="metricRecords">0</span><small>records</small></article>
+      <article><span id="metricPhone">0%</span><small>with phone</small></article>
+      <article><span id="metricWebsite">0%</span><small>with website</small></article>
+      <article><span id="metricQuality">0</span><small>average quality</small></article>
+    </section>
+
+    <section class="grid-two">
+      <section class="panel map-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">GEOGRAPHY</p><h2>Map</h2></div>
+        </div>
+        <div id="map" aria-label="Business map"></div>
+        <p class="attribution-note">Map data © OpenStreetMap contributors.</p>
+      </section>
+
+      <section class="panel analysis-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">ANALYSIS</p><h2>Dataset briefing</h2></div>
+        </div>
+        <textarea id="analysisInstruction" rows="4">Summarize market patterns, data gaps, and practical next steps.</textarea>
+        <button id="analyzeButton" type="button">Analyze current results</button>
+        <div id="analysisOutput" class="analysis-output">The built-in analysis works without an AI key. Configure Ollama or an OpenAI-compatible endpoint for model-generated analysis.</div>
+      </section>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-heading responsive-heading">
+        <div><p class="eyebrow">RESULTS</p><h2>Business records</h2></div>
+        <div class="actions">
+          <button id="downloadCsv" type="button" disabled>Download CSV</button>
+          <button id="downloadJson" type="button" disabled>Download JSON</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Category</th><th>Address</th><th>Contact</th><th>Rating</th><th>Quality</th><th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr><td colspan="7" class="empty">Run a search to load records.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>GeoBusiness Intelligence Studio · MIT</span>
+    <span>Verify records before use. Respect provider terms, privacy, and rate limits.</span>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
