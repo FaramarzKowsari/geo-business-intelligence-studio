@@ -1,20 +1,26 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "GeoBusiness Intelligence Studio"
+title: "GeoBusiness Intelligence Studio: An Open-Data Platform for Business Discovery, Mapping, Data Quality, and Optional BYOK AI"
 type: software
+abstract: "A privacy-aware FastAPI platform for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records through offline samples, OpenStreetMap, the optional official Google Places API, deterministic analysis, and optional BYOK AI."
 authors:
   - family-names: "Kowsari"
     given-names: "Faramarz"
     orcid: "https://orcid.org/0000-0003-1692-0453"
 repository-code: "https://github.com/FaramarzKowsari/geo-business-intelligence-studio"
-url: "https://github.com/FaramarzKowsari/geo-business-intelligence-studio"
+url: "https://faramarzkowsari.github.io/geo-business-intelligence-studio/"
 license: MIT
 version: 1.0.0
-date-released: 2026-07-23
+date-released: 2026-07-24
 keywords:
   - geospatial intelligence
   - local business discovery
-  - openstreetmap
-  - fastapi
+  - OpenStreetMap
+  - Nominatim
+  - Overpass API
+  - FastAPI
+  - business intelligence
   - data engineering
-  - artificial intelligence
+  - data quality
+  - duplicate detection
+  - BYOK AI

@@ -1,0 +1,32 @@
+# GeoBusiness Intelligence Studio
+
+Canonical project page: https://faramarzkowsari.github.io/geo-business-intelligence-studio/
+Source repository: https://github.com/FaramarzKowsari/geo-business-intelligence-studio
+Guidebook: https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/
+Guidebook PDF: https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/inside-geobusiness-intelligence-studio.pdf
+
+GeoBusiness Intelligence Studio is a privacy-aware FastAPI platform by Faramarz Kowsari for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records.
+
+Core providers:
+- fictional offline sample records;
+- OpenStreetMap through Nominatim and Overpass;
+- optional official Google Places Text Search with the user's own API key.
+
+Core capabilities:
+- common provider adapter interface;
+- Pydantic validation and OpenAPI documentation;
+- data normalization and visible provenance;
+- probable duplicate removal;
+- interpretable data-completeness scoring;
+- Leaflet mapping;
+- CSV and JSON export;
+- deterministic analysis without AI;
+- optional Ollama or OpenAI-compatible BYOK analysis;
+- Docker, tests, and GitHub Actions CI.
+
+The repository does not scrape the Google Maps website, bypass CAPTCHAs, rotate identities, or evade access controls.
+
+Author:
+Faramarz Kowsari — author, Software Engineer, and AI researcher.
+ORCID: https://orcid.org/0000-0003-1692-0453
+GitHub: https://github.com/FaramarzKowsari

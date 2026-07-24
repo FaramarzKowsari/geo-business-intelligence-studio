@@ -1,0 +1,41 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "GeoBusiness Intelligence Studio",
+  "description": "A privacy-aware FastAPI platform for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records with open-data and optional BYOK integrations.",
+  "codeRepository": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio",
+  "issueTracker": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "1.0.0",
+  "datePublished": "2026-07-24",
+  "programmingLanguage": [
+    "Python",
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ],
+  "runtimePlatform": "Python 3.11+",
+  "operatingSystem": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Docker"
+  ],
+  "author": {
+    "@type": "Person",
+    "givenName": "Faramarz",
+    "familyName": "Kowsari",
+    "id": "https://orcid.org/0000-0003-1692-0453",
+    "url": "https://github.com/FaramarzKowsari"
+  },
+  "keywords": [
+    "geospatial intelligence",
+    "OpenStreetMap",
+    "FastAPI",
+    "business intelligence",
+    "data engineering",
+    "BYOK AI"
+  ],
+  "developmentStatus": "active",
+  "applicationCategory": "BusinessApplication"
+}
