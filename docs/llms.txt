@@ -30,3 +30,11 @@ Author:
 Faramarz Kowsari — author, Software Engineer, and AI researcher.
 ORCID: https://orcid.org/0000-0003-1692-0453
 GitHub: https://github.com/FaramarzKowsari
+
+Version 1.2 distribution and safeguards:
+- Render Blueprint for a full public FastAPI web service.
+- GitHub Actions Windows build producing a self-contained EXE.
+- Process-wide Nominatim and Overpass request spacing.
+- Long-lived geocoding cache, complete-search cache, request coalescing, and stale fallback.
+- Per-client public OSM limits and production search caps.
+- Runtime-configurable Nominatim, Overpass, and tile endpoints.

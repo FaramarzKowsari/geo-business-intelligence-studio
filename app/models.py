@@ -55,6 +55,9 @@ class SearchMeta(BaseModel):
     returned: int
     duplicates_removed: int = 0
     warnings: list[str] = Field(default_factory=list)
+    cache_hit: bool = False
+    cache_stale: bool = False
+    cache_age_seconds: int | None = Field(default=None, ge=0)
 
 
 class SearchResponse(BaseModel):

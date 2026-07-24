@@ -1,0 +1,87 @@
+name: Build Windows Edition
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install application and builder
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]" "pyinstaller>=6.12,<7"
+
+      - name: Verify source
+        run: |
+          python -m ruff check .
+          python -m pytest
+
+      - name: Build one-file Windows application
+        shell: pwsh
+        run: python -m PyInstaller --noconfirm --clean geobusiness_windows.spec
+
+      - name: Smoke test packaged application
+        shell: pwsh
+        run: |
+          $env:GEOBUSINESS_NO_BROWSER = "1"
+          $env:GEOBUSINESS_NO_UI = "1"
+          $env:GEOBUSINESS_PORT = "8765"
+          $process = Start-Process -FilePath "dist/GeoBusiness-Intelligence-Studio.exe" -PassThru
+          try {
+            $healthy = $false
+            for ($i = 0; $i -lt 60; $i++) {
+              Start-Sleep -Milliseconds 500
+              try {
+                $response = Invoke-RestMethod -Uri "http://127.0.0.1:8765/api/health" -TimeoutSec 2
+                if ($response.status -eq "ok") {
+                  $healthy = $true
+                  break
+                }
+              } catch {}
+            }
+            if (-not $healthy) {
+              throw "Packaged application did not become healthy."
+            }
+          } finally {
+            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Generate checksum
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash "dist/GeoBusiness-Intelligence-Studio.exe" -Algorithm SHA256).Hash.ToLower()
+          "$hash  GeoBusiness-Intelligence-Studio.exe" | Set-Content "dist/GeoBusiness-Intelligence-Studio.exe.sha256"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GeoBusiness-Intelligence-Studio-Windows
+          path: |
+            dist/GeoBusiness-Intelligence-Studio.exe
+            dist/GeoBusiness-Intelligence-Studio.exe.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Attach files to published release
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" `
+            "dist/GeoBusiness-Intelligence-Studio.exe" `
+            "dist/GeoBusiness-Intelligence-Studio.exe.sha256" `
+            --clobber

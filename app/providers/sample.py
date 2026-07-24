@@ -11,7 +11,9 @@ class SampleProvider(BusinessProvider):
 
     def __init__(self) -> None:
         path = Path(__file__).resolve().parent.parent / "data" / "sample_businesses.json"
-        self._records = [Business.model_validate(item) for item in json.loads(path.read_text("utf-8"))]
+        self._records = [
+            Business.model_validate(item) for item in json.loads(path.read_text("utf-8"))
+        ]
 
     async def search(self, request: SearchRequest) -> list[Business]:
         query_tokens = {token.casefold() for token in request.query.split() if token}

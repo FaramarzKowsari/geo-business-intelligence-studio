@@ -17,7 +17,8 @@ def deterministic_analysis(request: AnalysisRequest) -> str:
     average_rating = sum(ratings) / len(ratings) if ratings else None
     categories: dict[str, int] = {}
     for item in businesses:
-        categories[item.category or "uncategorized"] = categories.get(item.category or "uncategorized", 0) + 1
+        category = item.category or "uncategorized"
+        categories[category] = categories.get(category, 0) + 1
     leading_categories = sorted(categories.items(), key=lambda pair: pair[1], reverse=True)[:5]
     category_text = ", ".join(f"{name} ({count})" for name, count in leading_categories)
     rating_text = f"{average_rating:.2f}/5" if average_rating is not None else "not available"
@@ -64,7 +65,8 @@ class AIAnalyzer:
             "You are a careful business-data analyst. Use only the supplied records. "
             "Separate observations from inferences, mention missing data, and do not invent facts."
         )
-        user = f"Instruction: {request.instruction}\nRecords:\n{json.dumps(compact, ensure_ascii=False)}"
+        records_json = json.dumps(compact, ensure_ascii=False)
+        user = f"Instruction: {request.instruction}\nRecords:\n{records_json}"
         headers = {"Content-Type": "application/json"}
         if self.settings.ai_api_key:
             headers["Authorization"] = f"Bearer {self.settings.ai_api_key}"

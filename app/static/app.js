@@ -2,13 +2,23 @@ let businesses = [];
 let map;
 let markerLayer;
 
-function initializeMap() {
+async function initializeMap() {
   if (!window.L) {
     document.getElementById('map').innerHTML = '<div class="empty">Map library unavailable. The table still works.</div>';
     return;
   }
+  let tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  try {
+    const configResponse = await fetch('/api/runtime-config');
+    if (configResponse.ok) {
+      const config = await configResponse.json();
+      if (config.tile_url) tileUrl = config.tile_url;
+    }
+  } catch (_) {
+    // Keep the documented OpenStreetMap default when runtime configuration is unavailable.
+  }
   map = L.map('map').setView([52.3676, 4.9041], 11);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer(tileUrl, {
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
@@ -139,7 +149,10 @@ document.getElementById('searchForm').addEventListener('submit', async event => 
     businesses = data.businesses;
     refreshView();
     const warning = data.meta.warnings.length ? ` ${data.meta.warnings.join(' ')}` : '';
-    setMessage(`Returned ${data.meta.returned} records; removed ${data.meta.duplicates_removed} duplicate(s).${warning}`);
+    const cache = data.meta.cache_hit
+      ? ` Served from ${data.meta.cache_stale ? 'stale ' : ''}cache (${data.meta.cache_age_seconds ?? 0}s old).`
+      : '';
+    setMessage(`Returned ${data.meta.returned} records; removed ${data.meta.duplicates_removed} duplicate(s).${cache}${warning}`);
     setLoading(false, 'Complete');
   } catch (error) {
     businesses = [];

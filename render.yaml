@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: geo-business-intelligence-studio
+    runtime: python
+    plan: free
+    region: frankfurt
+    autoDeploy: true
+    buildCommand: pip install --upgrade pip && pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /api/health
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: APP_ENV
+        value: render
+      - key: APP_CONTACT_EMAIL
+        value: https://github.com/FaramarzKowsari/geo-business-intelligence-studio
+      - key: PUBLIC_BASE_URL
+        value: https://faramarzkowsari.github.io/geo-business-intelligence-studio/
+      - key: NOMINATIM_BASE_URL
+        value: https://nominatim.openstreetmap.org
+      - key: OVERPASS_BASE_URL
+        value: https://overpass-api.de/api/interpreter
+      - key: OSM_TILE_URL
+        value: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+      - key: NOMINATIM_MIN_INTERVAL_SECONDS
+        value: "1.1"
+      - key: OVERPASS_MIN_INTERVAL_SECONDS
+        value: "1.0"
+      - key: GEOCODE_CACHE_TTL_SECONDS
+        value: "604800"
+      - key: GEOCODE_STALE_TTL_SECONDS
+        value: "2592000"
+      - key: OSM_SEARCH_CACHE_TTL_SECONDS
+        value: "900"
+      - key: OSM_SEARCH_STALE_TTL_SECONDS
+        value: "3600"
+      - key: PUBLIC_OSM_REQUESTS_PER_MINUTE
+        value: "10"
+      - key: PUBLIC_OSM_MAX_RECORDS
+        value: "50"
+      - key: PUBLIC_OSM_MAX_RADIUS_M
+        value: "25000"
+      - key: PUBLIC_OSM_ENABLED
+        value: "true"
+      - key: AI_PROVIDER
+        value: none

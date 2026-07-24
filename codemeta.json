@@ -6,7 +6,7 @@
   "codeRepository": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio",
   "issueTracker": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "datePublished": "2026-07-24",
   "programmingLanguage": [
     "Python",

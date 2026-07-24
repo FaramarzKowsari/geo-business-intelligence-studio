@@ -1,9 +1,17 @@
+from __future__ import annotations
+
+import hashlib
+import json
 import re
 import unicodedata
 from difflib import SequenceMatcher
 
+import httpx
+
+from app.config import Settings
 from app.models import Business, SearchMeta, SearchRequest, SearchResponse
-from app.providers.base import BusinessProvider
+from app.providers.base import BusinessProvider, ProviderError
+from app.traffic import AsyncRequestCoalescer, AsyncTTLCache
 
 
 def normalize_text(value: str) -> str:
@@ -59,10 +67,28 @@ def deduplicate_businesses(items: list[Business]) -> tuple[list[Business], int]:
 
 
 class SearchService:
-    def __init__(self, providers: dict[str, BusinessProvider]) -> None:
+    def __init__(self, providers: dict[str, BusinessProvider], settings: Settings) -> None:
         self.providers = providers
+        self.settings = settings
+        self._cache: AsyncTTLCache[SearchResponse] = AsyncTTLCache(512)
+        self._coalescer: AsyncRequestCoalescer[SearchResponse] = AsyncRequestCoalescer()
 
-    async def search(self, request: SearchRequest) -> SearchResponse:
+    @staticmethod
+    def _cache_key(request: SearchRequest) -> str:
+        payload = json.dumps(request.model_dump(mode="json"), sort_keys=True, ensure_ascii=False)
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    def _cache_policy(self, provider: str) -> tuple[int, int]:
+        if provider == "openstreetmap":
+            return (
+                self.settings.osm_search_cache_ttl_seconds,
+                self.settings.osm_search_stale_ttl_seconds,
+            )
+        if provider == "google_places":
+            return self.settings.google_search_cache_ttl_seconds, 0
+        return 3600, 0
+
+    async def _search_uncached(self, request: SearchRequest) -> SearchResponse:
         provider = self.providers[request.provider.value]
         businesses = await provider.search(request)
         for business in businesses:
@@ -75,8 +101,11 @@ class SearchService:
 
         warnings: list[str] = []
         if request.provider.value == "openstreetmap":
-            warnings.append(
-                "OpenStreetMap coverage varies by region. Verify contact fields before use."
+            warnings.extend(
+                [
+                    "OpenStreetMap coverage varies by region. Verify contact fields before use.",
+                    "Public OSM services are protected by caching and global request spacing.",
+                ]
             )
         if request.provider.value == "sample":
             warnings.append("Sample records are fictional and intended only for demonstration.")
@@ -92,3 +121,42 @@ class SearchService:
                 warnings=warnings,
             ),
         )
+
+    async def search(self, request: SearchRequest) -> SearchResponse:
+        key = self._cache_key(request)
+        cached = await self._cache.get(key)
+        if cached.value is not None:
+            response = cached.value.model_copy(deep=True)
+            response.meta.cache_hit = True
+            response.meta.cache_age_seconds = round(cached.age_seconds or 0)
+            return response
+
+        async def fetch_and_cache() -> SearchResponse:
+            try:
+                response = await self._search_uncached(request)
+            except (ProviderError, httpx.HTTPError):
+                stale = await self._cache.get(key, allow_stale=True)
+                if stale.value is not None:
+                    response = stale.value.model_copy(deep=True)
+                    response.meta.cache_hit = True
+                    response.meta.cache_stale = True
+                    response.meta.cache_age_seconds = round(stale.age_seconds or 0)
+                    response.meta.warnings.append(
+                        "The upstream service was unavailable; a stale cached result was returned."
+                    )
+                    return response
+                raise
+            ttl, stale_ttl = self._cache_policy(request.provider.value)
+            if ttl > 0:
+                await self._cache.set(
+                    key,
+                    response.model_copy(deep=True),
+                    ttl_seconds=ttl,
+                    stale_ttl_seconds=stale_ttl,
+                )
+            return response
+
+        return await self._coalescer.run(key, fetch_and_cache)
+
+    async def cache_size(self) -> int:
+        return await self._cache.size()

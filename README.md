@@ -7,6 +7,8 @@
 
 [![CI](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/ci.yml)
 [![Pages](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/deploy-pages.yml)
+[![Windows build](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml/badge.svg)](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml)
+[![Deploy to Render](https://img.shields.io/badge/Deploy-Render-46e3b7.svg)](https://render.com/deploy?repo=https://github.com/FaramarzKowsari/geo-business-intelligence-studio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-45d9e8.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776ab.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-OpenAPI-009688.svg)](https://fastapi.tiangolo.com/)
@@ -17,6 +19,10 @@
 **Visual guidebook:** `https://FaramarzKowsari.github.io/geo-business-intelligence-studio/guidebook/`
 
 **Source code:** `https://github.com/FaramarzKowsari/geo-business-intelligence-studio`
+
+**One-click Render deployment:** `https://render.com/deploy?repo=https://github.com/FaramarzKowsari/geo-business-intelligence-studio`
+
+**Windows builds:** `https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml`
 
 </div>
 
@@ -87,7 +93,10 @@ Use descriptive anchor text when linking to the project. Consistent titles help 
 - generate a deterministic dataset briefing without AI;
 - optionally use Ollama or an OpenAI-compatible BYOK endpoint;
 - expose interactive OpenAPI documentation through FastAPI;
-- run with Docker and verify code through GitHub Actions.
+- run with Docker and verify code through GitHub Actions;
+- deploy through a Render Blueprint;
+- build a self-contained Windows EXE through GitHub Actions;
+- protect public OSM services with caching, coalescing, request spacing, and client limits.
 
 ## Verified live OpenStreetMap search
 
@@ -107,6 +116,44 @@ The demonstrated search returned 29 records after removing one probable duplicat
 | **Probable duplicate** | An inferred duplicate based on stronger and softer matching evidence. |
 | **Deterministic briefing** | A built-in statistical summary generated without a model. |
 | **AI analysis** | Optional interpretation from Ollama or an OpenAI-compatible endpoint; it is not source evidence. |
+
+## Three ways to use the application
+
+### 1. Browser-only deployment on Render
+
+Use the repository Blueprint to deploy the complete FastAPI application as a public web service:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/FaramarzKowsari/geo-business-intelligence-studio)
+
+Render installs the application, binds Uvicorn to `$PORT`, checks `/api/health`, and automatically redeploys when the linked branch changes. See [Render deployment](docs/RENDER_DEPLOYMENT.md).
+
+### 2. Windows edition — no Python or PowerShell required
+
+The **Build Windows Edition** workflow creates a one-file `GeoBusiness-Intelligence-Studio.exe`. The user double-clicks the file; it starts a localhost-only server and opens the dashboard in the default browser. Download a workflow artifact or a release attachment from:
+
+- [Windows build workflow](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml)
+- [GitHub Releases](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases)
+- [Windows edition guide](docs/WINDOWS_EDITION.md)
+
+### 3. Developer and Docker modes
+
+Developers can run the source with Python or Docker for inspection, modification, testing, and private deployment.
+
+## OpenStreetMap community-service protection
+
+The public Nominatim endpoint is not treated as an unlimited backend. Version 1.2 adds:
+
+- a stable and contactable application User-Agent;
+- at least 1.1 seconds between Nominatim request starts;
+- globally serialized upstream requests in each service process;
+- seven-day city-geocoding cache and fifteen-minute full-search cache;
+- stale-cache fallback during short upstream failures;
+- coalescing of simultaneous identical requests;
+- per-client public search limits;
+- production caps on search radius and returned records;
+- environment-configurable Nominatim, Overpass, and tile endpoints.
+
+The Render Blueprint deliberately runs one worker so the process-level gate remains authoritative. Multi-instance deployments require a shared cache and distributed limiter. See [OSM service protection](docs/OSM_SERVICE_PROTECTION.md).
 
 ## Quick start — no API key
 
@@ -150,7 +197,7 @@ Open `http://localhost:8000`.
 
 ### OpenStreetMap
 
-No API key is required. The application geocodes the city with Nominatim and retrieves matching objects with Overpass. Public services are shared infrastructure: use a truthful application identifier, keep traffic modest, cache in production, and operate dedicated infrastructure for sustained workloads.
+No API key is required. The application geocodes the city with Nominatim and retrieves matching objects with Overpass. Public services are shared infrastructure. The application now enforces a Nominatim request interval, caches geocodes and complete searches, coalesces identical requests, limits public clients, caps production searches, and supports endpoint replacement without a software update. Dedicated infrastructure remains necessary for sustained or commercial traffic.
 
 ```env
 APP_CONTACT_EMAIL=https://github.com/FaramarzKowsari/geo-business-intelligence-studio
