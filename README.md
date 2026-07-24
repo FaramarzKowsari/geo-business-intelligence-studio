@@ -9,12 +9,14 @@
 [![Pages](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/deploy-pages.yml)
 [![Windows build](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml/badge.svg)](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml)
 [![Deploy to Render](https://img.shields.io/badge/Deploy-Render-46e3b7.svg)](https://render.com/deploy?repo=https://github.com/FaramarzKowsari/geo-business-intelligence-studio)
+[![Live Application](https://img.shields.io/badge/Live%20Application-Open%20in%20Browser-46e3b7.svg)](https://geo-business-intelligence-studio.onrender.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-45d9e8.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776ab.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-OpenAPI-009688.svg)](https://fastapi.tiangolo.com/)
 [![DOI status](https://img.shields.io/badge/DOI-pending%20Zenodo%20release-8ca0b3.svg)](docs/ZENODO_RELEASE_GUIDE.md)
 
 **Project site:** `https://FaramarzKowsari.github.io/geo-business-intelligence-studio/`
+**Live application:** `https://geo-business-intelligence-studio.onrender.com`
 
 **Visual guidebook:** `https://FaramarzKowsari.github.io/geo-business-intelligence-studio/guidebook/`
 
@@ -70,6 +72,7 @@ The ten-section guidebook explains the project purpose, provider architecture, w
 
 ## Canonical project links
 
+- [Launch GeoBusiness Intelligence Studio in your browser](https://geo-business-intelligence-studio.onrender.com)
 - [GeoBusiness Intelligence Studio — public project site](https://faramarzkowsari.github.io/geo-business-intelligence-studio/)
 - [GeoBusiness Intelligence Studio source code and technical documentation](https://github.com/FaramarzKowsari/geo-business-intelligence-studio)
 - [Inside GeoBusiness Intelligence Studio — visual guidebook](https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/)
@@ -122,7 +125,11 @@ The demonstrated search returned 29 records after removing one probable duplicat
 ### 1. Browser-only deployment on Render
 
 Use the repository Blueprint to deploy the complete FastAPI application as a public web service:
+### Launch the hosted application
 
+[Open GeoBusiness Intelligence Studio](https://geo-business-intelligence-studio.onrender.com)
+
+No Python, PowerShell, installation, or API key is required for the core application.
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/FaramarzKowsari/geo-business-intelligence-studio)
 
 Render installs the application, binds Uvicorn to `$PORT`, checks `/api/health`, and automatically redeploys when the linked branch changes. See [Render deployment](docs/RENDER_DEPLOYMENT.md).
