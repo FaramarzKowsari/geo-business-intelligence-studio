@@ -16,7 +16,7 @@ services:
       - key: APP_CONTACT_EMAIL
         value: https://github.com/FaramarzKowsari/geo-business-intelligence-studio
       - key: PUBLIC_BASE_URL
-        value: https://faramarzkowsari.github.io/geo-business-intelligence-studio/
+        value: https://geo-business-intelligence-studio.onrender.com/
       - key: NOMINATIM_BASE_URL
         value: https://nominatim.openstreetmap.org
       - key: OVERPASS_BASE_URL
