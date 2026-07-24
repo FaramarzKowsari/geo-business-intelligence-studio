@@ -3,7 +3,6 @@ import io
 
 from app.models import Business
 
-
 EXPORT_FIELDS = [
     "name",
     "category",

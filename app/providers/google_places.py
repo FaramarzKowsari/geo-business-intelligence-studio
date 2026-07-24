@@ -19,20 +19,7 @@ class GooglePlacesProvider(BusinessProvider):
                 "Google Places is not configured. Add GOOGLE_PLACES_API_KEY to your local .env file."
             )
 
-        fields = ",".join(
-            [
-                "places.id",
-                "places.displayName",
-                "places.formattedAddress",
-                "places.location",
-                "places.primaryType",
-                "places.rating",
-                "places.userRatingCount",
-                "places.internationalPhoneNumber",
-                "places.websiteUri",
-                "places.googleMapsUri",
-            ]
-        )
+        fields = "places.id,places.displayName,places.formattedAddress,places.location,places.primaryType,places.rating,places.userRatingCount,places.internationalPhoneNumber,places.websiteUri,places.googleMapsUri"
         headers = {
             "Content-Type": "application/json",
             "X-Goog-Api-Key": self.settings.google_places_api_key,

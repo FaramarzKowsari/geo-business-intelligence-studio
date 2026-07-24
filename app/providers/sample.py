@@ -18,7 +18,7 @@ class SampleProvider(BusinessProvider):
         city = request.city.casefold()
 
         def matches(record: Business) -> bool:
-            haystack = " ".join([record.name, record.category, record.address]).casefold()
+            haystack = f"{record.name} {record.category} {record.address}".casefold()
             city_match = city in record.city.casefold() or record.city.casefold() in city
             query_match = any(token in haystack for token in query_tokens)
             return city_match and query_match

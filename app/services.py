@@ -2,7 +2,7 @@ import re
 import unicodedata
 from difflib import SequenceMatcher
 
-from app.models import Business, SearchRequest, SearchResponse, SearchMeta
+from app.models import Business, SearchMeta, SearchRequest, SearchResponse
 from app.providers.base import BusinessProvider
 
 

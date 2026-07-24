@@ -1,10 +1,10 @@
 import re
+
 import httpx
 
 from app.config import Settings
 from app.models import Business, SearchRequest
 from app.providers.base import BusinessProvider, ProviderError
-
 
 CATEGORY_RULES: list[tuple[tuple[str, ...], tuple[str, str]]] = [
     (("coffee", "cafe", "café"), ("amenity", "cafe")),
