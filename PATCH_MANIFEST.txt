@@ -1,0 +1,13 @@
+CITATION.cff
+README.md
+codemeta.json
+docs/GUIDEBOOK.md
+docs/POST_RELEASE_CHECKLIST.md
+docs/SEARCH_CONSOLE_GUIDE.md
+docs/WINDOWS_EDITION.md
+docs/ZENODO_RELEASE_GUIDE.md
+docs/guidebook/index.html
+docs/guidebook/inside-geobusiness-intelligence-studio.pdf
+docs/index.html
+docs/llms.txt
+docs/sitemap.xml

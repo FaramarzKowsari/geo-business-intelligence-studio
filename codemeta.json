@@ -4,6 +4,9 @@
   "name": "GeoBusiness Intelligence Studio",
   "description": "A privacy-aware FastAPI platform for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records with open-data and optional BYOK integrations.",
   "codeRepository": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio",
+  "identifier": "https://doi.org/10.5281/zenodo.21539094",
+  "sameAs": "https://doi.org/10.5281/zenodo.21539094",
+  "downloadUrl": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe",
   "issueTracker": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "1.2.0",
@@ -31,9 +34,13 @@
   "keywords": [
     "geospatial intelligence",
     "OpenStreetMap",
+    "Nominatim",
+    "Overpass API",
     "FastAPI",
     "business intelligence",
     "data engineering",
+    "data quality",
+    "duplicate detection",
     "BYOK AI"
   ],
   "developmentStatus": "active",

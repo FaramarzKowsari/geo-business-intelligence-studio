@@ -1,37 +1,45 @@
 # Windows edition
 
-The repository can produce `GeoBusiness-Intelligence-Studio.exe`, a one-file Windows application that does not require the user to install Python or type PowerShell commands.
+## Official download
 
-## Build from GitHub Actions
+The verified Windows edition is distributed as an official GitHub Release asset:
 
-1. Open the repository's **Actions** tab.
-2. Select **Build Windows Edition**.
-3. Choose **Run workflow**.
-4. When the workflow finishes, download the `GeoBusiness-Intelligence-Studio-Windows` artifact.
+- [Download GeoBusiness Intelligence Studio EXE](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe)
+- [Download SHA-256 checksum](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe.sha256)
+- [View all releases](https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases)
 
-The artifact contains:
+The executable is self-contained. Users do not need Python, PowerShell, pip, Git, or a virtual environment.
 
-- `GeoBusiness-Intelligence-Studio.exe`
-- `GeoBusiness-Intelligence-Studio.exe.sha256`
+## Run the application
 
-Double-clicking the EXE starts a localhost-only FastAPI server on an available port and opens the browser automatically. Closing the application process stops the local server.
+1. Download `GeoBusiness-Intelligence-Studio.exe`.
+2. Keep the accompanying `.sha256` file when verification is required.
+3. Double-click the EXE.
+4. Keep the application process open while using the browser dashboard.
 
-## Release attachment
+The program starts a localhost-only FastAPI server on an available port and opens the default browser. It does not expose the local service to other computers.
 
-When a GitHub Release is published, the same workflow builds and smoke-tests the Windows application, then attaches the EXE and SHA-256 file to that Release.
+## Verification
+
+The Windows executable is built, started, and health-checked automatically on a GitHub-hosted Windows runner before publication. Compare the SHA-256 hash with:
+
+`GeoBusiness-Intelligence-Studio.exe.sha256`
 
 ## Windows security notice
 
-The application is open source but is not Authenticode-signed. Windows SmartScreen may display an unfamiliar-publisher warning until a code-signing certificate is added and reputation is established.
+The project is open source, but the executable is not Authenticode-signed. Windows SmartScreen may show an unfamiliar-publisher warning until a code-signing certificate and reputation are established.
 
-## Local build
+## Build workflow
 
-A Windows developer can build it with:
+The **Build Windows Edition** workflow:
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-desktop.txt
-.\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean geobusiness_windows.spec
-```
+1. installs the application and PyInstaller;
+2. runs Ruff and the test suite;
+3. builds a one-file executable;
+4. launches the packaged application;
+5. checks `/api/health`;
+6. creates a SHA-256 checksum;
+7. publishes an Actions artifact;
+8. attaches the EXE and checksum to a published GitHub Release.
 
-PyInstaller is not a cross-compiler, so the Windows binary must be produced on Windows. The GitHub Actions job uses `windows-latest` for that reason.
+Workflow: https://github.com/FaramarzKowsari/geo-business-intelligence-studio/actions/workflows/build-windows.yml

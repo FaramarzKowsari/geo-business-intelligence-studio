@@ -1,9 +1,12 @@
 # GeoBusiness Intelligence Studio
 
 Canonical project page: https://faramarzkowsari.github.io/geo-business-intelligence-studio/
+Live application: https://geo-business-intelligence-studio.onrender.com
 Source repository: https://github.com/FaramarzKowsari/geo-business-intelligence-studio
+Windows EXE: https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe
 Guidebook: https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/
 Guidebook PDF: https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/inside-geobusiness-intelligence-studio.pdf
+Zenodo DOI: https://doi.org/10.5281/zenodo.21539094
 
 GeoBusiness Intelligence Studio is a privacy-aware FastAPI platform by Faramarz Kowsari for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records.
 
@@ -13,28 +16,21 @@ Core providers:
 - optional official Google Places Text Search with the user's own API key.
 
 Core capabilities:
-- common provider adapter interface;
+- provider adapter interface;
 - Pydantic validation and OpenAPI documentation;
-- data normalization and visible provenance;
+- data normalization and provenance;
 - probable duplicate removal;
 - interpretable data-completeness scoring;
 - Leaflet mapping;
 - CSV and JSON export;
 - deterministic analysis without AI;
 - optional Ollama or OpenAI-compatible BYOK analysis;
-- Docker, tests, and GitHub Actions CI.
+- Render deployment, Docker, tests, CI, and a verified Windows EXE.
 
 The repository does not scrape the Google Maps website, bypass CAPTCHAs, rotate identities, or evade access controls.
 
-Author:
-Faramarz Kowsari — author, Software Engineer, and AI researcher.
+Version: 1.2.0
+Release date: 2026-07-24
+License: MIT
+Author: Faramarz Kowsari
 ORCID: https://orcid.org/0000-0003-1692-0453
-GitHub: https://github.com/FaramarzKowsari
-
-Version 1.2 distribution and safeguards:
-- Render Blueprint for a full public FastAPI web service.
-- GitHub Actions Windows build producing a self-contained EXE.
-- Process-wide Nominatim and Overpass request spacing.
-- Long-lived geocoding cache, complete-search cache, request coalescing, and stale fallback.
-- Per-client public OSM limits and production search caps.
-- Runtime-configurable Nominatim, Overpass, and tile endpoints.
