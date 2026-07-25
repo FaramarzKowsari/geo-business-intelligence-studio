@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081832">
+  <meta name="description" content="Download and run the verified Windows edition of GeoBusiness Intelligence Studio without installing Python or using PowerShell. Includes SHA-256 verification, SmartScreen guidance, release links, DOI, citation, and browser access.">
+  <meta name="author" content="Faramarz Kowsari">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="citation_title" content="GeoBusiness Intelligence Studio: An Open-Data Platform for Business Discovery, Mapping, Data Quality, and Optional BYOK AI">
+  <meta name="citation_author" content="Faramarz Kowsari">
+  <meta name="citation_publication_date" content="2026-07-24">
+  <meta name="citation_doi" content="10.5281/zenodo.21539094">
+
+  <link rel="canonical" href="https://faramarzkowsari.github.io/geo-business-intelligence-studio/windows/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="stylesheet" href="../assets/site.css">
+
+  <meta property="og:title" content="GeoBusiness Intelligence Studio — Windows Edition">
+  <meta property="og:description" content="Download the verified self-contained Windows executable, verify its SHA-256 checksum, and run GeoBusiness Intelligence Studio without Python or PowerShell.">
+  <meta property="og:image" content="https://faramarzkowsari.github.io/geo-business-intelligence-studio/assets/geobusiness-hero.svg">
+  <meta property="og:url" content="https://faramarzkowsari.github.io/geo-business-intelligence-studio/windows/">
+  <meta property="og:type" content="website">
+
+  <title>Windows Edition — GeoBusiness Intelligence Studio</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://faramarzkowsari.github.io/geo-business-intelligence-studio/windows/#windows-edition",
+    "name": "GeoBusiness Intelligence Studio — Windows Edition",
+    "description": "A verified self-contained Windows executable for discovering, normalizing, deduplicating, mapping, analyzing, and exporting local-business records.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "softwareVersion": "1.2.0",
+    "datePublished": "2026-07-24",
+    "isAccessibleForFree": true,
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://faramarzkowsari.github.io/geo-business-intelligence-studio/windows/",
+    "downloadUrl": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe",
+    "softwareHelp": "https://faramarzkowsari.github.io/geo-business-intelligence-studio/guidebook/",
+    "codeRepository": "https://github.com/FaramarzKowsari/geo-business-intelligence-studio",
+    "identifier": "https://doi.org/10.5281/zenodo.21539094",
+    "sameAs": [
+      "https://doi.org/10.5281/zenodo.21539094",
+      "https://geo-business-intelligence-studio.onrender.com",
+      "https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Faramarz Kowsari",
+      "url": "https://faramarzkowsari.github.io/",
+      "sameAs": [
+        "https://orcid.org/0000-0003-1692-0453",
+        "https://github.com/FaramarzKowsari",
+        "https://www.linkedin.com/in/faramarzkowsari",
+        "https://scholar.google.com/citations?user=G7tP5WMAAAAJ&hl=en"
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    .windows-hero {
+      background:
+        radial-gradient(circle at 82% 18%, rgba(148,158,255,.27), transparent 30%),
+        linear-gradient(135deg, #061329 0%, #172b63 54%, #5362ff 100%);
+    }
+    .windows-hero h1 { max-width: 980px; }
+    .download-card {
+      background: linear-gradient(145deg, #0a1938, #162d67);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .download-card p { color: #dce5ff; }
+    .download-card a:not(.btn) { color: #b9c6ff; }
+    .step-list {
+      display: grid;
+      gap: 14px;
+      counter-reset: runsteps;
+      margin-top: 26px;
+    }
+    .run-step {
+      counter-increment: runsteps;
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+    }
+    .run-step::before {
+      content: counter(runsteps);
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #4f5eff, #7c4dff);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.25rem;
+    }
+    .run-step h3 { margin: 0 0 4px; }
+    .run-step p { margin: 0; color: var(--muted); }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #4f5eff, #0dbca7);
+      margin-bottom: 14px;
+    }
+    .warning {
+      background: #fff7e8;
+      border: 1px solid #f1d49a;
+      border-left: 6px solid #f0a21a;
+      border-radius: 20px;
+      padding: 24px;
+    }
+    .citation {
+      background: #081832;
+      color: #fff;
+      border-radius: 24px;
+      padding: 26px;
+    }
+    .citation p { color: #d9e2ff; }
+    .citation code {
+      display: block;
+      white-space: normal;
+      padding: 14px;
+      background: #102858;
+      color: #eef2ff;
+      margin-top: 12px;
+    }
+    .mini-nav {
+      background: #061329;
+      color: #dbe4ff;
+      padding: 12px 0;
+      font-size: .92rem;
+    }
+    .mini-nav .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+    }
+    .mini-nav a { color: #fff; font-weight: 700; }
+    .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+    .check-item { background: #eefaf8; border: 1px solid #caeee7; border-radius: 16px; padding: 14px 16px; font-weight: 700; }
+    .check-item::before { content: "✓"; color: #079886; margin-right: 8px; }
+    @media(max-width:850px){
+      .check-grid { grid-template-columns: 1fr; }
+      .run-step { grid-template-columns: 44px 1fr; }
+      .run-step::before { width: 40px; height: 40px; border-radius: 13px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="mini-nav">
+    <div class="wrap">
+      <a href="../">Project Home</a>
+      <a href="../guidebook/">Guidebook</a>
+      <a href="https://geo-business-intelligence-studio.onrender.com">Live Browser App</a>
+      <a href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio">Source Repository</a>
+      <a href="https://doi.org/10.5281/zenodo.21539094">DOI</a>
+    </div>
+  </nav>
+
+  <header class="hero windows-hero">
+    <div class="wrap">
+      <p class="eyebrow">Verified desktop release · No Python or PowerShell required</p>
+      <h1>GeoBusiness Intelligence Studio — Windows Edition</h1>
+      <p class="lead">Download a self-contained Windows executable, launch the local dashboard, and use the core business-discovery workflow without setting up a development environment.</p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe">Download Windows EXE</a>
+        <a class="btn" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe.sha256">Download SHA-256</a>
+        <a class="btn" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases">View All Releases</a>
+        <a class="btn" href="https://geo-business-intelligence-studio.onrender.com">Use Browser Edition</a>
+      </div>
+
+      <div class="badges">
+        <span class="badge">Version 1.2.0</span>
+        <span class="badge">Windows 10 / 11</span>
+        <span class="badge">GitHub Actions Verified</span>
+        <span class="badge">SHA-256 Included</span>
+        <span class="badge">MIT License</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="wrap">
+        <div class="grid two">
+          <article class="panel download-card">
+            <p class="eyebrow">Official download</p>
+            <h2>Get the verified Windows build</h2>
+            <p>The executable is built, started, and health-checked on a GitHub-hosted Windows runner before publication. A separate SHA-256 file is provided for verification.</p>
+            <div class="actions">
+              <a class="btn primary" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe">Download EXE</a>
+              <a class="btn" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe.sha256">SHA-256 File</a>
+            </div>
+            <p style="margin-top:18px"><strong>Release assets:</strong><br>
+              <code>GeoBusiness-Intelligence-Studio.exe</code><br>
+              <code>GeoBusiness-Intelligence-Studio.exe.sha256</code>
+            </p>
+          </article>
+
+          <article class="panel">
+            <p class="eyebrow">What is included</p>
+            <h2>A ready-to-run local application</h2>
+            <div class="check-grid">
+              <div class="check-item">No Python installation</div>
+              <div class="check-item">No PowerShell commands</div>
+              <div class="check-item">No virtual environment</div>
+              <div class="check-item">No package installation</div>
+              <div class="check-item">Local browser dashboard</div>
+              <div class="check-item">Core features work without AI</div>
+            </div>
+            <p class="section-intro" style="margin-top:18px">The Windows edition starts the application locally and opens the dashboard in your default browser. Keep the application window open while using the dashboard.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:#eef2ff">
+      <div class="wrap">
+        <p class="eyebrow">Run the Windows edition</p>
+        <h2>Four simple steps</h2>
+
+        <div class="step-list">
+          <article class="run-step"><div><h3>Download the executable</h3><p>Use the official GitHub Release link above. Download the accompanying SHA-256 file when you want to verify the binary.</p></div></article>
+          <article class="run-step"><div><h3>Keep the release files together</h3><p>Place the EXE and checksum file in a folder you control, such as <code>Downloads\\GeoBusiness</code>.</p></div></article>
+          <article class="run-step"><div><h3>Double-click the EXE</h3><p>The application starts a local service and opens the dashboard in your default browser, typically at <code>http://127.0.0.1:8765</code>.</p></div></article>
+          <article class="run-step"><div><h3>Keep the application window open</h3><p>Use the browser dashboard while the local application is running. Close the application window when you are finished.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="warning">
+          <p class="eyebrow" style="color:#a35c00">Windows SmartScreen</p>
+          <h2>Why Windows may display an unknown-publisher warning</h2>
+          <p>The executable is distributed from the official GitHub Release but is not currently signed with a commercial code-signing certificate. Windows SmartScreen may therefore show an <strong>Unknown publisher</strong> warning.</p>
+          <p>After confirming that the download came from this repository, select <strong>More info</strong>, then <strong>Run anyway</strong>. For additional assurance, compare the executable's SHA-256 hash with the published checksum file.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:#081832;color:#fff">
+      <div class="wrap">
+        <p class="eyebrow">Why use the Windows edition</p>
+        <h2>Local access without a developer setup</h2>
+
+        <div class="grid three" style="margin-top:28px">
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">01</div><h3>Simple local launch</h3><p>Run the application with a double-click instead of configuring Python, pip, or a virtual environment.</p></article>
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">02</div><h3>Browser-based interface</h3><p>Use the same clear search, mapping, metrics, analysis, and export interface in your browser.</p></article>
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">03</div><h3>Verified release process</h3><p>The release workflow builds the EXE, starts it, checks the health endpoint, and generates a checksum.</p></article>
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">04</div><h3>Open-data workflow</h3><p>Use offline sample data and responsible OpenStreetMap discovery without making paid AI mandatory.</p></article>
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">05</div><h3>Structured exports</h3><p>Normalize records, remove probable duplicates, review data quality, and export CSV or JSON.</p></article>
+          <article class="panel card" style="color:#12213f"><div class="feature-icon">06</div><h3>Optional AI</h3><p>The core application runs without an AI key. BYOK analysis remains an optional enhancement.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Release integrity</p>
+        <h2>Download, verify, and inspect</h2>
+        <div class="grid three" style="margin-top:28px">
+          <article class="panel card"><div class="num">EXE</div><h3>Latest executable</h3><p><a href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe">Download the latest Windows EXE</a></p></article>
+          <article class="panel card"><div class="num">256</div><h3>Checksum</h3><p><a href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases/latest/download/GeoBusiness-Intelligence-Studio.exe.sha256">Download the SHA-256 verification file</a></p></article>
+          <article class="panel card"><div class="num">TAG</div><h3>Versioned releases</h3><p><a href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio/releases">Review release notes and all published assets</a></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:#eefaf8">
+      <div class="wrap">
+        <p class="eyebrow">Prefer zero installation?</p>
+        <h2>Use the live browser edition</h2>
+        <p class="section-intro">The hosted application provides immediate access to the project interface. The free Render instance may need a short startup period after inactivity.</p>
+        <div class="actions">
+          <a class="btn dark" href="https://geo-business-intelligence-studio.onrender.com">Launch Live Application</a>
+          <a class="btn dark" href="../guidebook/">Read the Guidebook</a>
+          <a class="btn dark" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio">Inspect Source Code</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Citation and preservation</p>
+        <h2>A versioned and citable software release</h2>
+        <div class="citation">
+          <p><strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.21539094" style="color:#fff">10.5281/zenodo.21539094</a></p>
+          <p><strong>Suggested citation:</strong></p>
+          <code>Kowsari, F. (2026). GeoBusiness Intelligence Studio: An Open-Data Platform for Business Discovery, Mapping, Data Quality, and Optional BYOK AI (Version 1.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.21539094</code>
+          <div class="actions">
+            <a class="btn primary" href="https://doi.org/10.5281/zenodo.21539094">Open Zenodo Record</a>
+            <a class="btn" href="https://github.com/FaramarzKowsari/geo-business-intelligence-studio">Open Repository</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">GeoBusiness Intelligence Studio · Windows Edition · Version 1.2.0 · DOI 10.5281/zenodo.21539094 · MIT © 2026 Faramarz Kowsari</div>
+  </footer>
+</body>
+</html>
